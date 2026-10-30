@@ -5,7 +5,54 @@ description: About Anthony Long Realty demo practice in southwest Dallas County 
 permalink: about/index.html
 ---
 <div class="wrapper section prose">
-<h1>About</h1>
-{# The home page links to /about/#process. The real process section replaces this stub in the About pull request. #}
-<p id="process">Content arrives in a later pull request.</p>
+  <h1>Anthony Long Realty</h1>
+
+  <section aria-labelledby="bio-title">
+    <h2 id="bio-title">Biography not on file</h2>
+    <p>We do not have a written biography for this demo. Nothing here describes years in the business, family history, or production totals.</p>
+  </section>
+
+  <section aria-labelledby="contact-facts-title">
+    <h2 id="contact-facts-title">Contact details</h2>
+    <p>Phone: {{ site.placeholder }}</p>
+    <p>Email: {{ site.placeholder }}</p>
+    <p>Office: {{ site.placeholder }}</p>
+    <p>License: {{ site.placeholder }}</p>
+  </section>
+
+  <section id="process" aria-labelledby="process-title">
+    <h2 id="process-title">Process</h2>
+    <h3>Buying</h3>
+    <ol class="process-list">
+      {% for step in process.buying %}
+      <li>
+        <h4 class="step-title">{{ step.title }}</h4>
+        {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+    <h3>Selling</h3>
+    <ol class="process-list">
+      {% for step in process.selling %}
+      <li>
+        <h4 class="step-title">{{ step.title }}</h4>
+        {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section aria-labelledby="cities-title">
+    <h2 id="cities-title">Cities we discuss</h2>
+    <ul>
+      {% for city in areas.cities %}
+      <li><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
+    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+  </div>
 </div>
