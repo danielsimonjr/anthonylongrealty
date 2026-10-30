@@ -1,0 +1,26 @@
+{
+  "disclaimer": "Sample listings. This demo is not connected to an MLS or IDX feed. These are not homes for sale.",
+  "items": [
+    {
+      "id": "sample-a",
+      "title": "Sample home A",
+      "city": "DeSoto",
+      "address": "Address withheld — sample only",
+      "price": "Price not listed"
+    },
+    {
+      "id": "sample-b",
+      "title": "Sample home B",
+      "city": "Cedar Hill",
+      "address": "Address withheld — sample only",
+      "price": "Price not listed"
+    },
+    {
+      "id": "sample-c",
+      "title": "Sample home C",
+      "city": "Duncanville",
+      "address": "Address withheld — sample only",
+      "price": "Price not listed"
+    }
+  ]
+}
