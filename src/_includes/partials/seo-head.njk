@@ -1,0 +1,20 @@
+{% set pagePath = page.url | url %}
+{% set canonicalUrl = site.demoOrigin + pagePath %}
+{% set ogImage = site.demoOrigin + ('/assets/img/og.png' | url) %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ ogTitle or title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ canonicalUrl }}">
+<meta property="og:image" content="{{ ogImage }}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | url }}" type="image/svg+xml">
+{% if schemaVariant == 'home' %}
+<script type="application/ld+json">
+{% include "partials/schema-home.njk" %}
+</script>
+{% elif schemaVariant == 'inner' %}
+<script type="application/ld+json">
+{% include "partials/schema-inner.njk" %}
+</script>
+{% endif %}

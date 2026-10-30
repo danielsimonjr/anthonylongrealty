@@ -8,8 +8,8 @@
   {% endif %}
   <meta name="description" content="{{ description }}">
   <title>{{ title }}</title>
+  {% include "partials/seo-head.njk" %}
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | url }}">
-  {% block head %}{% endblock %}
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
