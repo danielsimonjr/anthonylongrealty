@@ -565,54 +565,6 @@ h1 {
   opacity: 0.8;
 }
 
-.stats-band {
-  background: var(--color-navy);
-  color: var(--color-on-navy);
-  padding-block: var(--space-6);
-  box-shadow: 0 0 0 100vmax var(--color-navy);
-  clip-path: inset(0 -100vmax);
-}
-
-.stats-band__grid {
-  display: grid;
-  gap: var(--space-5);
-  text-align: center;
-}
-
-@media (min-width: 40rem) {
-  .stats-band__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 60rem) {
-  .stats-band__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.stat__value {
-  font-size: var(--text-lg);
-  font-weight: 800;
-  margin: 0 0 var(--space-2);
-  color: var(--color-sky);
-}
-
-.stat__label {
-  margin: 0;
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgb(247 244 238 / 0.85);
-}
-
-.stats-band__note {
-  margin: var(--space-5) 0 0;
-  text-align: center;
-  font-size: var(--text-xs);
-  color: rgb(247 244 238 / 0.7);
-}
-
 .split {
   display: grid;
   gap: var(--space-6);
