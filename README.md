@@ -21,7 +21,7 @@ npm run check
 
 Runs a production build, HTML, CSS, and SVG validation (the Nu Html Checker, which needs Java 21), a link check (lychee, against every built route served by Eleventy), and the repository guard rules in `scripts/guard.mjs`.
 
-The link check uses `lychee` from your `PATH` (or `LYCHEE_BIN`). If neither is set, it downloads a pinned, checksum-verified release into `.cache/`.
+The link check downloads a pinned, checksum-verified lychee release into `.cache/`. Set `LYCHEE_BIN` to use your own build instead; it must be 0.24 or newer, because older releases silently skip fragment checks.
 
 ## Deploy
 
