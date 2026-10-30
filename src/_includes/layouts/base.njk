@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if not noCanonical %}
+  <link rel="canonical" href="{{ site.demoOrigin }}{{ page.url | url }}">
+  {% endif %}
+  <meta name="description" content="{{ description }}">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | url }}">
+</head>
+<body>
+  {% include "partials/header.njk" %}
+  <main id="content" class="wrapper">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <script src="{{ '/assets/js/nav.js' | url }}" defer></script>
+  <script src="{{ '/assets/js/forms.js' | url }}" defer></script>
+</body>
+</html>

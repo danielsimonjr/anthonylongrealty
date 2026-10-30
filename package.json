@@ -1,0 +1,17 @@
+{
+  "name": "anthonylongrealty",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "check": "npm run build && node scripts/check-html.mjs && node scripts/check-links.mjs && node scripts/guard.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "vnu-jar": "^24.10.17"
+  }
+}
