@@ -1,13 +1,24 @@
-<header class="site-header wrapper">
-  <p><a href="{{ '/' | url }}">{{ site.name }}</a></p>
-  <nav aria-label="Primary">
-    <ul>
-      <li><a href="{{ '/' | url }}">Home</a></li>
-      <li><a href="{{ '/about/' | url }}">About</a></li>
-      <li><a href="{{ '/listings/' | url }}">Listings</a></li>
-      <li><a href="{{ '/areas/' | url }}">Areas</a></li>
-      <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
-      <li><a href="{{ '/contact/' | url }}">Contact</a></li>
-    </ul>
-  </nav>
+<header class="site-header">
+  <div class="site-header__inner wrapper">
+    <p class="site-brand"><a href="{{ '/' | url }}">{{ site.name }}</a></p>
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      data-nav-toggle
+    >
+      Menu
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-nav-panel hidden>
+      <ul class="primary-nav__list">
+        <li><a href="{{ '/' | url }}">Home</a></li>
+        <li><a href="{{ '/about/' | url }}">About</a></li>
+        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/areas/' | url }}">Areas</a></li>
+        <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
+        <li><a href="{{ '/contact/' | url }}">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>

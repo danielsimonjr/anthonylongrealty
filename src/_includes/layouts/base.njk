@@ -10,10 +10,13 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | url }}">
+  {% block head %}{% endblock %}
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  {% include "partials/banner.njk" %}
   {% include "partials/header.njk" %}
-  <main id="content" class="wrapper">
+  <main id="content">
     {{ content | safe }}
   </main>
   {% include "partials/footer.njk" %}

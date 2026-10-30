@@ -1,14 +1,46 @@
-<footer class="site-footer wrapper">
-  <p>{{ site.name }} · Demo site</p>
-  <nav aria-label="Footer">
-    <ul>
-      <li><a href="{{ '/' | url }}">Home</a></li>
-      <li><a href="{{ '/about/' | url }}">About</a></li>
-      <li><a href="{{ '/listings/' | url }}">Listings</a></li>
-      <li><a href="{{ '/areas/' | url }}">Areas</a></li>
-      <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
-      <li><a href="{{ '/contact/' | url }}">Contact</a></li>
-    </ul>
-  </nav>
-  <p>{{ site.placeholder }}</p>
+<footer class="site-footer">
+  <div class="wrapper site-footer__grid">
+    <div>
+      <p class="site-footer__title">{{ site.name }}</p>
+      <p class="text-muted">Demo site</p>
+    </div>
+    <nav aria-label="Footer primary">
+      <ul class="footer-links">
+        <li><a href="{{ '/' | url }}">Home</a></li>
+        <li><a href="{{ '/about/' | url }}">About</a></li>
+        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/areas/' | url }}">Areas</a></li>
+        <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
+        <li><a href="{{ '/contact/' | url }}">Contact</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="City guides">
+      <ul class="footer-links">
+        <li><a href="{{ '/areas/desoto/' | url }}">DeSoto guide</a></li>
+        <li><a href="{{ '/areas/cedar-hill/' | url }}">Cedar Hill guide</a></li>
+        <li><a href="{{ '/areas/duncanville/' | url }}">Duncanville guide</a></li>
+        <li><a href="{{ '/areas/lancaster/' | url }}">Lancaster guide</a></li>
+      </ul>
+    </nav>
+    <div class="contact-block">
+      <p>Phone: {{ site.placeholder }}</p>
+      <p>Email: {{ site.placeholder }}</p>
+      <p>Office: {{ site.placeholder }}</p>
+      <p>License: {{ site.placeholder }}</p>
+    </div>
+    <div class="trec-block text-xs">
+      <p>
+        <a href="https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-5_0.pdf">Texas Real Estate Commission Consumer Protection Notice</a>
+      </p>
+      <p>
+        <a href="https://www.trec.texas.gov/sites/default/files/pdf-forms/IABS%201-2.pdf">Texas Real Estate Commission Information About Brokerage Services</a>
+      </p>
+      <p>Demo: this official form is not filled in. License holder contact details are not on file.</p>
+    </div>
+    <p class="eho-line">
+      <img src="{{ '/assets/img/eho.svg' | url }}" width="24" height="24" alt="" aria-hidden="true">
+      Equal Housing Opportunity
+    </p>
+    <p class="text-xs">© {{ buildYear }} {{ site.name }}.</p>
+  </div>
 </footer>
