@@ -1,5 +1,6 @@
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
   return {
     pathPrefix: "/anthonylongrealty/",
     dir: {

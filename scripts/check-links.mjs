@@ -43,21 +43,31 @@ const server = spawn("npx", ["@11ty/eleventy", "--serve", "--port=8080"], {
 
 try {
   await waitForServer();
-  const run = spawnSync(
-    lychee,
-    [
-      "--verbose",
-      "--no-progress",
-      "--max-retries",
-      "3",
-      "--include-fragments",
-      "--exclude",
-      "^https://danielsimonjr\\.com/",
-      startUrl,
-    ],
-    { cwd: root, stdio: "inherit" },
-  );
-  if (run.status !== 0) process.exit(run.status ?? 1);
+  let lastStatus = 1;
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const run = spawnSync(
+      lychee,
+      [
+        "--verbose",
+        "--no-progress",
+        "--max-retries",
+        "5",
+        "--retry-wait-time",
+        "2",
+        "--include-fragments",
+        "--user-agent",
+        "Mozilla/5.0 (compatible; anthonylongrealty-demo/1.0; +https://danielsimonjr.com/anthonylongrealty/)",
+        "--exclude",
+        "^https://danielsimonjr\\.com/",
+        startUrl,
+      ],
+      { cwd: root, stdio: "inherit" },
+    );
+    lastStatus = run.status ?? 1;
+    if (lastStatus === 0) break;
+    if (attempt < 5) await new Promise((r) => setTimeout(r, 2000));
+  }
+  if (lastStatus !== 0) process.exit(lastStatus);
 } finally {
   process.kill(-server.pid, "SIGTERM");
 }
