@@ -135,6 +135,37 @@ for (const file of htmlFiles) {
     seenTitles.set(title, rel);
   }
 
+  if (title && title.length > 70) fail(`${rel}: title is ${title.length} characters; keep it near 60`);
+  if (!is404 && descriptions[0] && (descriptions[0].length < 100 || descriptions[0].length > 170)) {
+    fail(`${rel}: meta description is ${descriptions[0].length} characters; keep it near 150`);
+  }
+
+  const metaContent = (attr, name) =>
+    [...noComments.matchAll(new RegExp(`<meta\\s+${attr}="${name}"\\s+content="([^"]*)"`, "gi"))].map((m) => m[1]);
+  const socialIssue = (name, expected) => {
+    const found = metaContent("property", name);
+    if (found.length !== 1 || found[0] !== expected) {
+      fail(`${rel}: ${name} must be exactly ${JSON.stringify(expected)}, found ${JSON.stringify(found)}`);
+    }
+  };
+  if (is404) {
+    if (/property="og:|name="twitter:/i.test(noComments)) fail(`${rel}: the 404 page carries no social tags`);
+    if (/application\/ld\+json/i.test(noComments)) fail(`${rel}: the 404 page carries no JSON-LD`);
+  } else {
+    socialIssue("og:type", "website");
+    socialIssue("og:locale", "en_US");
+    socialIssue("og:title", title);
+    socialIssue("og:description", descriptions[0]);
+    socialIssue("og:url", `${ORIGIN}${BASE}${route}`);
+    socialIssue("og:image", `${ORIGIN}${BASE}assets/img/og.png`);
+    const card = metaContent("name", "twitter:card");
+    if (card.length !== 1 || card[0] !== "summary_large_image") fail(`${rel}: twitter:card must be summary_large_image`);
+  }
+  const icon = noComments.match(/<link\b[^>]*\brel="icon"[^>]*\bhref="([^"]*)"/i)?.[1];
+  if (!icon || !icon.startsWith(BASE) || !fs.existsSync(path.join(siteDir, icon.slice(BASE.length)))) {
+    fail(`${rel}: favicon link must point at a built file under ${BASE}: ${icon}`);
+  }
+
   if (/<base[\s>]/i.test(noComments)) fail(`${rel}: must not contain a base tag`);
   if (/\bhref\s*=\s*["']?\s*(tel|mailto|sms|callto):/i.test(html)) fail(`${rel}: must not use tel:, mailto:, sms:, or callto: links`);
   if (/realtor/i.test(html)) fail(`${rel}: must not contain the REALTOR word or mark`);
@@ -187,6 +218,8 @@ for (const file of htmlFiles) {
   if (/\(?\b\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\b/.test(text)) fail(`${rel}: looks like a phone number in visible text`);
   if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(noComments)) fail(`${rel}: looks like an email address`);
 
+  if (!is404 && !/type="application\/ld\+json"/i.test(noComments)) fail(`${rel}: missing JSON-LD`);
+
   for (const m of noComments.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
     let data;
     try {
@@ -194,6 +227,15 @@ for (const file of htmlFiles) {
     } catch (error) {
       fail(`${rel}: JSON-LD does not parse: ${error.message}`);
       continue;
+    }
+    const expectedKeys = route === "" ? ["@context", "@type", "areaServed", "name", "url"] : ["@context", "@type", "name", "url"];
+    if (Object.keys(data).sort().join() !== expectedKeys.join()) {
+      fail(`${rel}: JSON-LD keys must be ${expectedKeys.join(", ")}, found ${Object.keys(data).sort().join(", ")}`);
+    }
+    if (data.url !== `${ORIGIN}${BASE}`) fail(`${rel}: JSON-LD url must be ${ORIGIN}${BASE}`);
+    if (data.name !== site.name) fail(`${rel}: JSON-LD name must match site.json`);
+    if (route === "" && (data.areaServed || []).map((c) => c.name).join() !== "DeSoto,Cedar Hill,Duncanville,Lancaster") {
+      fail(`${rel}: JSON-LD areaServed must list the four demo cities`);
     }
     const scan = (node) => {
       if (Array.isArray(node)) return node.forEach(scan);
@@ -237,6 +279,41 @@ for (const file of [...walk(siteDir, ".txt"), ...walk(siteDir, ".xml")]) {
     if (m[0].startsWith("http://www.sitemaps.org/")) continue;
     if (!m[0].startsWith(`${ORIGIN}${BASE}`)) fail(`${rel}: URL must start with ${ORIGIN}${BASE}: ${m[0]}`);
   }
+}
+
+// ---- Sitemap, robots, social image ------------------------------------------
+
+const expectedRoutes = htmlFiles
+  .map((f) => path.relative(siteDir, f))
+  .filter((rel) => rel !== "404.html")
+  .map((rel) => `${ORIGIN}${BASE}${routeFor(rel)}`)
+  .sort();
+const sitemapPath = path.join(siteDir, "sitemap.xml");
+if (!fs.existsSync(sitemapPath)) fail("sitemap.xml is missing");
+else {
+  const xml = read(sitemapPath);
+  const locs = [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => m[1]).sort();
+  if (locs.join("\n") !== expectedRoutes.join("\n")) {
+    fail(`sitemap.xml: locations must be exactly the built pages except 404.html.\n    expected ${JSON.stringify(expectedRoutes)}\n    found    ${JSON.stringify(locs)}`);
+  }
+  const lastmods = [...xml.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)];
+  if (lastmods.length !== locs.length) fail("sitemap.xml: every url needs a YYYY-MM-DD lastmod");
+}
+const robotsPath = path.join(siteDir, "robots.txt");
+if (!fs.existsSync(robotsPath)) fail("robots.txt is missing");
+else {
+  const robots = read(robotsPath).trim().split(/\r?\n/).filter(Boolean);
+  const expectedRobots = ["User-agent: *", "Allow: /", `Sitemap: ${ORIGIN}${BASE}sitemap.xml`];
+  if (robots.join("\n") !== expectedRobots.join("\n")) fail(`robots.txt must be exactly: ${expectedRobots.join(" | ")}`);
+}
+const ogPath = path.join(siteDir, "assets", "img", "og.png");
+if (!fs.existsSync(ogPath)) fail("assets/img/og.png is missing");
+else {
+  const png = fs.readFileSync(ogPath);
+  const isPng = png.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  const [w, h] = isPng ? [png.readUInt32BE(16), png.readUInt32BE(20)] : [0, 0];
+  if (!isPng || w !== 1200 || h !== 630) fail(`og.png must be a 1200x630 PNG, found ${isPng ? `${w}x${h}` : "not a PNG"}`);
+  if (png.length < 10000) fail("og.png is suspiciously small; it should carry the name and the demo notice");
 }
 
 if (errors.length) {

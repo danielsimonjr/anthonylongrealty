@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "pngjs": "^7.0.0",
     "vnu-jar": "^24.10.17"
   }
 }

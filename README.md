@@ -23,6 +23,10 @@ Runs a production build, HTML, CSS, and SVG validation (the Nu Html Checker, whi
 
 The link check downloads a pinned, checksum-verified lychee release into `.cache/`. Set `LYCHEE_BIN` to use your own build instead; it must be 0.24 or newer, because older releases silently skip fragment checks.
 
+## Social image
+
+`src/assets/img/og.png` (1200 x 630) is rendered from `scripts/og-source.svg`. To change it, edit the SVG, open it in a browser sized 1200 x 630, and save a screenshot over the PNG. The guard fails if the PNG is missing, the wrong size, or nearly empty.
+
 ## Deploy
 
 `.github/workflows/pages.yml` publishes `_site` to GitHub Pages on `workflow_dispatch` and on every push to `main`. It never runs on pull requests.

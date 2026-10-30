@@ -4,22 +4,10 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% set routes = [
-    "/",
-    "/about/",
-    "/listings/",
-    "/areas/",
-    "/areas/desoto/",
-    "/areas/cedar-hill/",
-    "/areas/duncanville/",
-    "/areas/lancaster/",
-    "/contact/",
-    "/home-value/"
-  ] %}
-  {% for route in routes %}
+{%- for item in collections.all | sort(false, true, "url") %}
   <url>
-    <loc>{{ site.demoOrigin }}/anthonylongrealty{% if route == '/' %}/{% else %}{{ route }}{% endif %}</loc>
+    <loc>{{ site.demoOrigin }}{{ item.url | url }}</loc>
     <lastmod>{{ buildDate }}</lastmod>
   </url>
-  {% endfor %}
+{%- endfor %}
 </urlset>
