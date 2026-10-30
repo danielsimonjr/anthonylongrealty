@@ -1,45 +1,33 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const toggle = document.querySelector("[data-nav-toggle]");
   const panel = document.querySelector("[data-nav-panel]");
   if (!toggle || !panel) return;
 
-  const mq = window.matchMedia("(min-width: 48rem)");
+  const wide = window.matchMedia("(min-width: 48rem)");
 
-  function syncLayout() {
-    if (mq.matches) {
+  function setOpen(open) {
+    toggle.setAttribute("aria-expanded", String(open));
+    panel.hidden = !open;
+  }
+
+  function sync() {
+    // On wide screens the links are always visible and the button is hidden by CSS.
+    if (wide.matches) {
+      toggle.setAttribute("aria-expanded", "false");
       panel.hidden = false;
-      toggle.hidden = true;
-      toggle.setAttribute("aria-expanded", "false");
     } else {
-      toggle.hidden = false;
-      panel.hidden = true;
-      toggle.setAttribute("aria-expanded", "false");
+      setOpen(false);
     }
   }
 
-  function closePanel() {
-    if (mq.matches) return;
-    panel.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
-  }
-
-  function openPanel() {
-    panel.hidden = false;
-    toggle.setAttribute("aria-expanded", "true");
-  }
-
-  toggle.addEventListener("click", () => {
-    if (panel.hidden) openPanel();
-    else closePanel();
-  });
+  toggle.addEventListener("click", () => setOpen(panel.hidden));
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closePanel();
-      toggle.focus();
-    }
+    if (event.key !== "Escape" || wide.matches || panel.hidden) return;
+    setOpen(false);
+    toggle.focus();
   });
 
-  mq.addEventListener("change", syncLayout);
-  syncLayout();
-});
+  wide.addEventListener("change", sync);
+  sync();
+})();
