@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 schemaVariant: home
 title: Anthony Long Realty (demo) · DeSoto & SW Dallas County
-description: Demo site for Anthony Long Realty in DeSoto and southwest Dallas County. Placeholder stats, portrait, and reviews. Forms on this site do not send.
+description: Demo site for Anthony Long Realty in DeSoto and southwest Dallas County. Placeholder portrait and reviews. Forms on this site do not send.
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrapper hero__inner">
@@ -13,21 +13,6 @@ description: Demo site for Anthony Long Realty in DeSoto and southwest Dallas Co
       <a class="path-btn" href="{{ '/sell/' | url }}"><span>Sell</span><span aria-hidden="true">→</span></a>
       <a class="path-btn" href="{{ '/home-value/' | url }}"><span>What's my home worth?</span><span aria-hidden="true">→</span></a>
     </div>
-  </div>
-</section>
-
-<section class="stats-band" aria-labelledby="stats-title">
-  <div class="wrapper">
-    <h2 id="stats-title" class="visually-hidden">Practice highlights</h2>
-    <ul class="stats-band__grid">
-      {% for stat in stats.items %}
-      <li>
-        <p class="stat__value">{{ stat.value }}</p>
-        <p class="stat__label">{{ stat.label }}</p>
-      </li>
-      {% endfor %}
-    </ul>
-    <p class="stats-band__note">{{ stats.disclaimer }}</p>
   </div>
 </section>
 
