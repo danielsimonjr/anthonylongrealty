@@ -2,7 +2,7 @@
   "items": [
     {
       "question": "Can I search live listings here?",
-      "answer": "This demo has sample cards, not a live search. Real availability would come from a separate MLS-connected site."
+      "answer": "This demo has sample cards, not a live search. It is not connected to an MLS or IDX feed, so nothing on it is for sale."
     },
     {
       "question": "Which cities do the guides cover?",

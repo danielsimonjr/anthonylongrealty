@@ -27,7 +27,7 @@ permalink: about/index.html
     <ol class="process-list">
       {% for step in process.buying %}
       <li>
-        <strong>{{ step.title }}</strong>
+        <h4 class="step-title">{{ step.title }}</h4>
         {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
       </li>
       {% endfor %}
@@ -36,7 +36,7 @@ permalink: about/index.html
     <ol class="process-list">
       {% for step in process.selling %}
       <li>
-        <strong>{{ step.title }}</strong>
+        <h4 class="step-title">{{ step.title }}</h4>
         {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
       </li>
       {% endfor %}

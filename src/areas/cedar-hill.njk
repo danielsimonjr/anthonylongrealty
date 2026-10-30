@@ -6,4 +6,4 @@ description: Cedar Hill Texas area guide on the Anthony Long Realty demo site.
 permalink: areas/cedar-hill/index.html
 ---
 {% from "macros/area-guide.njk" import renderGuide %}
-{{ renderGuide(areas.guides["cedar-hill"]) }}
+{{ renderGuide(areas.guides["cedar-hill"], listings.items) }}
