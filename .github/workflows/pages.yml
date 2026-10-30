@@ -1,8 +1,14 @@
-# GitHub Pages is not enabled by this workflow. Do not add a push trigger as part of the build pull requests.
+# This workflow does not enable GitHub Pages. A person must choose "GitHub Actions"
+# as the Pages source in the repository settings before the first deploy can succeed;
+# until then the deploy step fails and nothing is published.
+# The owner approved publishing at https://danielsimonjr.com/anthonylongrealty/, so this
+# runs on push to main as well as by hand. It must never run on pull_request.
 name: Deploy Pages
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -27,6 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: node scripts/guard.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
