@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+schemaVariant: inner
+title: Midlothian guide · Anthony Long Realty (demo)
+description: Demo guide to buying and selling in Midlothian, Texas, with Anthony Long Realty. Placeholder contact details only; this page is not a live property search.
+permalink: areas/midlothian/index.html
+---
+{% from "macros/area-guide.njk" import renderGuide %}
+{{ renderGuide(areas.guides.midlothian, listings.items) }}

@@ -1,18 +1,21 @@
 ---
 layout: layouts/base.njk
 schemaVariant: inner
-title: Contact the practice · Anthony Long Realty (demo)
-description: Contact form for the Anthony Long Realty demo. Phone, email, office, and license are placeholders, and the form does not send or save anything.
+title: Contact Anthony Long · Anthony Long Realty (demo)
+description: Contact form for the Anthony Long Realty demo in DeSoto and southwest Dallas County. Phone, email, office, and license are placeholders, and the form does not send.
 permalink: contact/index.html
 ---
-<div class="wrapper section prose">
+<div class="wrapper page-layout">
   <h1>Contact</h1>
+  <p class="page-intro">Send a message through the demo form below. Nothing is emailed or saved from this site.</p>
   {% include "partials/lead-form.njk" %}
   <section aria-labelledby="contact-text-title">
     <h2 id="contact-text-title">Reach the practice</h2>
-    <p>Phone: {{ site.placeholder }}</p>
-    <p>Email: {{ site.placeholder }}</p>
-    <p>Office: {{ site.placeholder }}</p>
-    <p>License: {{ site.placeholder }}</p>
+    <div class="prose">
+      <p>Phone: {{ site.placeholder }}</p>
+      <p>Email: {{ site.placeholder }}</p>
+      <p>Office: {{ site.placeholder }}</p>
+      <p>License: {{ site.placeholder }}</p>
+    </div>
   </section>
 </div>

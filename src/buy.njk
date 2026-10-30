@@ -1,0 +1,40 @@
+---
+layout: layouts/base.njk
+schemaVariant: inner
+title: Buy a home · Anthony Long Realty (demo)
+description: Demo buying page for Anthony Long Realty in DeSoto and southwest Dallas County. Five steps, loan types, and placeholders only—no live MLS search.
+permalink: buy/index.html
+---
+<div class="wrapper page-layout">
+  <h1>Buy with Anthony Long Realty</h1>
+  <p class="page-intro">{{ copy.buyingPageLead }}</p>
+  <p class="prose">{{ copy.buyingIntro }}</p>
+
+  <h2 class="section__title">Five buying steps</h2>
+  <ol class="steps-grid">
+    {% for step in process.buying %}
+    <li class="step-card">
+      <h3 class="step-card__title">{{ step.title }}</h3>
+      {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+
+  <div class="loan-strip" aria-labelledby="buy-loan-title">
+    <h2 id="buy-loan-title" class="section__title">Loan types we discuss</h2>
+    <p class="prose">{{ loans.intro }}</p>
+    <div class="loan-grid">
+      {% for loan in loans.items %}
+      <article class="loan-card card">
+        <h3>{{ loan.title }}</h3>
+        <p>{{ loan.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/?topic=buying' | url }}">Start a buying conversation</a>
+    <a class="btn btn--outline" href="{{ '/listings/' | url }}">Sample listings</a>
+  </div>
+</div>

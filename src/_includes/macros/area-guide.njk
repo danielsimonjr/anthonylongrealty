@@ -1,18 +1,21 @@
 {# Macros do not see the page data, so the guide and the listings are passed in. #}
 {% macro renderGuide(guide, listingItems) %}
-<div class="wrapper section prose">
+<div class="wrapper page-layout">
   <h1>{{ guide.name }}</h1>
-  {% for paragraph in guide.paragraphs %}
-  <p>{{ paragraph }}</p>
-  {% endfor %}
+  <div class="prose">
+    {% for paragraph in guide.paragraphs %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+  </div>
 
   <h2>Buying in {{ guide.name }}</h2>
-  <p>We start with your timeline and the streets you want to tour in {{ guide.name }}. Financing is a separate conversation with a lender you choose.</p>
+  <p class="prose">We start with your timeline and the streets you want to tour in {{ guide.name }}. Financing is a separate conversation with a lender you choose.</p>
 
   <h2>Selling in {{ guide.name }}</h2>
-  <p>We walk the house, talk through prep, and plan showings. A home-value conversation is not an appraisal, and this demo does not calculate a price.</p>
+  <p class="prose">We walk the house, talk through prep, and plan showings. A home-value conversation is not an appraisal, and this demo does not calculate a price.</p>
 
   <h2>Sample listings</h2>
+  <div class="card-grid">
   {% set matches = 0 %}
   {% for listing in listingItems %}
   {% if listing.city == guide.name %}
@@ -20,13 +23,14 @@
   {% include "partials/listing-card.njk" %}
   {% endif %}
   {% endfor %}
+  </div>
   {% if matches == 0 %}
-  <p>There is no sample card for {{ guide.name }} in this demo. <a href="{{ '/contact/?topic=buying' | url }}">Ask about a real search</a> through the contact form.</p>
+  <p class="prose">There is no sample card for {{ guide.name }} in this demo. <a href="{{ '/contact/?topic=buying' | url }}">Ask about a real search</a> through the contact form.</p>
   {% endif %}
 
   <div class="btn-row">
     <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
-    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+    <a class="btn btn--outline" href="{{ '/home-value/' | url }}">Home value</a>
   </div>
 </div>
 {% endmacro %}

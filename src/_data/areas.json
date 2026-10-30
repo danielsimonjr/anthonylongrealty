@@ -1,17 +1,19 @@
 {
   "intro": "Southwest Dallas County is the focus of this demo.",
-  "indexIntro": "This demo focuses on four cities in southwest Dallas County: DeSoto, Cedar Hill, Duncanville, and Lancaster. Each guide covers how buying and selling would work there. None of them is a live search.",
+  "indexIntro": "Guides for six cities in and around southwest Dallas County. Each page explains how buying and selling would work there. None of them is a live search.",
   "cities": [
-    { "name": "DeSoto", "slug": "desoto", "blurb": "Notes on buying and selling in DeSoto." },
-    { "name": "Cedar Hill", "slug": "cedar-hill", "blurb": "Notes on buying and selling in Cedar Hill." },
-    { "name": "Duncanville", "slug": "duncanville", "blurb": "Notes on buying and selling in Duncanville." },
-    { "name": "Lancaster", "slug": "lancaster", "blurb": "Notes on buying and selling in Lancaster." }
+    { "name": "DeSoto", "slug": "desoto", "blurb": "Buying and selling notes for DeSoto." },
+    { "name": "Cedar Hill", "slug": "cedar-hill", "blurb": "Buying and selling notes for Cedar Hill." },
+    { "name": "Duncanville", "slug": "duncanville", "blurb": "Buying and selling notes for Duncanville." },
+    { "name": "Lancaster", "slug": "lancaster", "blurb": "Buying and selling notes for Lancaster." },
+    { "name": "Red Oak", "slug": "red-oak", "blurb": "Buying and selling notes for Red Oak." },
+    { "name": "Midlothian", "slug": "midlothian", "blurb": "Buying and selling notes for Midlothian." }
   ],
   "guides": {
     "desoto": {
       "name": "DeSoto",
       "paragraphs": [
-        "DeSoto is one of the four cities this demo covers, all in southwest Dallas County.",
+        "DeSoto is one of the cities this demo covers in southwest Dallas County.",
         "This guide sticks to how we would talk through a move there.",
         "Streets, parks, schools, and prices are left out because none of that is on file for this demo."
       ]
@@ -19,14 +21,14 @@
     "cedar-hill": {
       "name": "Cedar Hill",
       "paragraphs": [
-        "Cedar Hill is in southwest Dallas County. It is one of four cities in this demo, along with DeSoto, Duncanville, and Lancaster.",
+        "Cedar Hill is in southwest Dallas County and is part of this demo's city guides.",
         "Local details are not on file here, so this guide stays with the buying and selling steps."
       ]
     },
     "duncanville": {
       "name": "Duncanville",
       "paragraphs": [
-        "Duncanville is in southwest Dallas County and is part of this demo's four-city focus.",
+        "Duncanville is in southwest Dallas County and is part of this demo's focus.",
         "A move here starts with the same questions as a move anywhere: what you need, and when you need it.",
         "We leave out claims about the area until they can be checked against the city's own pages."
       ]
@@ -34,8 +36,24 @@
     "lancaster": {
       "name": "Lancaster",
       "paragraphs": [
-        "Lancaster is in southwest Dallas County and is the fourth city in this demo.",
+        "Lancaster is in southwest Dallas County and is included in this demo.",
         "If you are thinking about a move there, the contact form is the place to start."
+      ]
+    },
+    "red-oak": {
+      "name": "Red Oak",
+      "paragraphs": [
+        "Red Oak sits south of the Dallas–Fort Worth metro and is listed in this demo as a nearby market.",
+        "This page does not include local statistics or street-level detail.",
+        "Use the contact form if you want to talk through timing and next steps."
+      ]
+    },
+    "midlothian": {
+      "name": "Midlothian",
+      "paragraphs": [
+        "Midlothian is another Ellis County city buyers and sellers ask about from this part of the metro.",
+        "Nothing here claims prices, schools, or commute times.",
+        "The steps below match how we would work with you in any of these cities."
       ]
     }
   }

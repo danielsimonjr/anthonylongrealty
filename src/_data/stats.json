@@ -1,0 +1,9 @@
+{
+  "disclaimer": "Sample metrics only. Replace each line when Anthony supplies real numbers.",
+  "items": [
+    { "value": "[Placeholder: real stat from Anthony]", "label": "Years serving the area" },
+    { "value": "[Placeholder: real stat from Anthony]", "label": "Closed transactions" },
+    { "value": "[Placeholder: real stat from Anthony]", "label": "Five-star reviews" },
+    { "value": "[Placeholder: real stat from Anthony]", "label": "Neighborhoods covered" }
+  ]
+}

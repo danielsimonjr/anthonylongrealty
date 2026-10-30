@@ -234,8 +234,8 @@ for (const file of htmlFiles) {
     }
     if (data.url !== `${ORIGIN}${BASE}`) fail(`${rel}: JSON-LD url must be ${ORIGIN}${BASE}`);
     if (data.name !== site.name) fail(`${rel}: JSON-LD name must match site.json`);
-    if (route === "" && (data.areaServed || []).map((c) => c.name).join() !== "DeSoto,Cedar Hill,Duncanville,Lancaster") {
-      fail(`${rel}: JSON-LD areaServed must list the four demo cities`);
+    if (route === "" && (data.areaServed || []).map((c) => c.name).join() !== "DeSoto,Cedar Hill,Duncanville,Lancaster,Red Oak,Midlothian") {
+      fail(`${rel}: JSON-LD areaServed must list the six demo cities`);
     }
     const scan = (node) => {
       if (Array.isArray(node)) return node.forEach(scan);

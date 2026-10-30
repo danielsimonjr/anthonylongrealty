@@ -1,25 +1,29 @@
 <footer class="site-footer">
   <div class="wrapper site-footer__grid">
     <div>
-      <p class="site-footer__title">{{ site.name }}</p>
-      <p class="text-muted">Demo site</p>
+      <p class="site-footer__title">
+        <span class="site-brand__name">Anthony Long</span>
+        <span class="site-brand__realty">Realty</span>
+      </p>
+      <p class="text-muted">Demo site · DeSoto, TX area</p>
     </div>
     <nav aria-label="Footer primary">
       <ul class="footer-links">
-        <li><a href="{{ '/' | url }}">Home</a></li>
-        <li><a href="{{ '/about/' | url }}">About</a></li>
-        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/buy/' | url }}">Buy</a></li>
+        <li><a href="{{ '/sell/' | url }}">Sell</a></li>
         <li><a href="{{ '/areas/' | url }}">Areas</a></li>
-        <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
+        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/about/' | url }}">About</a></li>
+        <li><a href="{{ '/reviews/' | url }}">Reviews</a></li>
         <li><a href="{{ '/contact/' | url }}">Contact</a></li>
+        <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
       </ul>
     </nav>
     <nav aria-label="City guides">
       <ul class="footer-links">
-        <li><a href="{{ '/areas/desoto/' | url }}">DeSoto guide</a></li>
-        <li><a href="{{ '/areas/cedar-hill/' | url }}">Cedar Hill guide</a></li>
-        <li><a href="{{ '/areas/duncanville/' | url }}">Duncanville guide</a></li>
-        <li><a href="{{ '/areas/lancaster/' | url }}">Lancaster guide</a></li>
+        {% for city in areas.cities %}
+        <li><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a></li>
+        {% endfor %}
       </ul>
     </nav>
     <div class="contact-block">
@@ -41,6 +45,8 @@
       <img src="{{ '/assets/img/eho.svg' | url }}" width="24" height="24" alt="" aria-hidden="true">
       Equal Housing Opportunity
     </p>
-    <p class="text-xs">© {{ buildYear }} {{ site.name }}.</p>
+    <div class="footer-legal text-xs">
+      <p>© {{ buildYear }} Anthony Long Realty. <a href="{{ '/accessibility/' | url }}">Accessibility</a></p>
+    </div>
   </div>
 </footer>

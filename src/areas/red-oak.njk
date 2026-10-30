@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+schemaVariant: inner
+title: Red Oak guide · Anthony Long Realty (demo)
+description: Demo guide to buying and selling in Red Oak, Texas, with Anthony Long Realty. No prices or local statistics are on file—only process steps and placeholders.
+permalink: areas/red-oak/index.html
+---
+{% from "macros/area-guide.njk" import renderGuide %}
+{{ renderGuide(areas.guides["red-oak"], listings.items) }}
