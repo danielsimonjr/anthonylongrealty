@@ -4,7 +4,5 @@ title: Duncanville guide · Anthony Long Realty (demo)
 description: Duncanville Texas area guide on the Anthony Long Realty demo site.
 permalink: areas/duncanville/index.html
 ---
-<div class="wrapper section prose">
-<h1>Duncanville</h1>
-<p>Content arrives in a later pull request.</p>
-</div>
+{% from "macros/area-guide.njk" import renderGuide %}
+{{ renderGuide(areas.guides.duncanville, listings.items) }}

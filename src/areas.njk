@@ -4,7 +4,16 @@ title: Areas · Anthony Long Realty (demo)
 description: City guides for DeSoto, Cedar Hill, Duncanville, and Lancaster on this demo site.
 permalink: areas/index.html
 ---
-<div class="wrapper section prose">
-<h1>Areas</h1>
-<p>Content arrives in a later pull request.</p>
+<div class="wrapper section">
+  <h1>Area guides</h1>
+  <p class="prose">{{ areas.indexIntro }}</p>
+  <div class="card-grid card-grid--cities">
+    {% for city in areas.cities %}
+    <article class="card">
+      <h2 class="card__title">{{ city.name }}</h2>
+      <p>{{ city.blurb }}</p>
+      <p><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a></p>
+    </article>
+    {% endfor %}
+  </div>
 </div>

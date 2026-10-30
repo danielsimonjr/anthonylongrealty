@@ -1,9 +1,42 @@
 {
   "intro": "Southwest Dallas County is the focus of this demo.",
+  "indexIntro": "This demo focuses on four cities in southwest Dallas County: DeSoto, Cedar Hill, Duncanville, and Lancaster. Each guide covers how buying and selling would work there. None of them is a live search.",
   "cities": [
     { "name": "DeSoto", "slug": "desoto", "blurb": "Notes on buying and selling in DeSoto." },
     { "name": "Cedar Hill", "slug": "cedar-hill", "blurb": "Notes on buying and selling in Cedar Hill." },
     { "name": "Duncanville", "slug": "duncanville", "blurb": "Notes on buying and selling in Duncanville." },
     { "name": "Lancaster", "slug": "lancaster", "blurb": "Notes on buying and selling in Lancaster." }
-  ]
+  ],
+  "guides": {
+    "desoto": {
+      "name": "DeSoto",
+      "paragraphs": [
+        "DeSoto is one of the four cities this demo covers, all in southwest Dallas County.",
+        "This guide sticks to how we would talk through a move there.",
+        "Streets, parks, schools, and prices are left out because none of that is on file for this demo."
+      ]
+    },
+    "cedar-hill": {
+      "name": "Cedar Hill",
+      "paragraphs": [
+        "Cedar Hill is in southwest Dallas County. It is one of four cities in this demo, along with DeSoto, Duncanville, and Lancaster.",
+        "Local details are not on file here, so this guide stays with the buying and selling steps."
+      ]
+    },
+    "duncanville": {
+      "name": "Duncanville",
+      "paragraphs": [
+        "Duncanville is in southwest Dallas County and is part of this demo's four-city focus.",
+        "A move here starts with the same questions as a move anywhere: what you need, and when you need it.",
+        "We leave out claims about the area until they can be checked against the city's own pages."
+      ]
+    },
+    "lancaster": {
+      "name": "Lancaster",
+      "paragraphs": [
+        "Lancaster is in southwest Dallas County and is the fourth city in this demo.",
+        "If you are thinking about a move there, the contact form is the place to start."
+      ]
+    }
+  }
 }
