@@ -1,103 +1,139 @@
 ---
 layout: layouts/base.njk
 schemaVariant: home
-title: Anthony Long Realty (demo) · Southwest Dallas County
-description: Demo site for Anthony Long Realty in southwest Dallas County, with sample listing cards and city guides. All details are placeholders and the forms do not send.
+title: Anthony Long Realty (demo) · DeSoto & SW Dallas County
+description: Demo site for Anthony Long Realty in DeSoto and southwest Dallas County. Placeholder stats, portrait, and reviews. Forms on this site do not send.
 ---
-<section class="section hero wrapper">
-  <h1>Help buying and selling in DeSoto, Cedar Hill, Duncanville, and Lancaster</h1>
-  <p class="prose">Anthony Long Realty is an independent Texas practice focused on these southwest Dallas County cities.</p>
-  <div class="btn-row">
-    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
-    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
-  </div>
-</section>
-
-<section class="section wrapper" aria-labelledby="services-title">
-  <h2 id="services-title" class="section__title">Services</h2>
-  <div class="card-grid">
-    {% for service in services.items %}
-    <article class="card">
-      <h3>{{ service.title }}</h3>
-      <p>{{ service.body }}</p>
-    </article>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="section section--sand wrapper" aria-labelledby="practice-title">
-  <h2 id="practice-title" class="section__title">The practice</h2>
-  <div class="prose">
-    <p>Anthony Long Realty works with buyers and sellers in southwest Dallas County. This demo explains how we talk through goals before any contract.</p>
-    <div class="portrait">
-      <span class="portrait__monogram" aria-hidden="true">AL</span>
-      <span class="portrait__label">Placeholder portrait. No photo is on file.</span>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrapper hero__inner">
+    <h1 id="hero-title">Local. Honest.<span class="hero__script">Your neighbor.</span></h1>
+    <p class="hero__lead">I help buyers and sellers in DeSoto, Cedar Hill, Duncanville, Lancaster, Red Oak, Midlothian, and nearby cities. This demo uses placeholders until Anthony supplies real details.</p>
+    <div class="hero__paths">
+      <a class="path-btn" href="{{ '/buy/' | url }}"><span>Buy</span><span aria-hidden="true">→</span></a>
+      <a class="path-btn" href="{{ '/sell/' | url }}"><span>Sell</span><span aria-hidden="true">→</span></a>
+      <a class="path-btn" href="{{ '/home-value/' | url }}"><span>What's my home worth?</span><span aria-hidden="true">→</span></a>
     </div>
-    <p>License: {{ site.placeholder }}</p>
-    <p><a href="{{ '/about/' | url }}">Read about the practice</a></p>
   </div>
 </section>
 
-<section class="section wrapper" aria-labelledby="process-preview-title">
-  <h2 id="process-preview-title" class="section__title">Buying steps</h2>
-  <ol class="process-list prose">
+<section class="stats-band" aria-labelledby="stats-title">
+  <div class="wrapper">
+    <h2 id="stats-title" class="visually-hidden">Practice highlights</h2>
+    <ul class="stats-band__grid">
+      {% for stat in stats.items %}
+      <li>
+        <p class="stat__value">{{ stat.value }}</p>
+        <p class="stat__label">{{ stat.label }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="stats-band__note">{{ stats.disclaimer }}</p>
+  </div>
+</section>
+
+<section class="section wrapper split" aria-labelledby="meet-title">
+  <div class="portrait" role="img" aria-label="Placeholder headshot for Anthony Long">
+    <span class="portrait__monogram" aria-hidden="true">AL</span>
+    <span class="portrait__label">Placeholder portrait. No photo is on file.</span>
+  </div>
+  <div>
+    <p class="section__eyebrow">Meet Anthony</p>
+    <h2 id="meet-title">Your neighbor in real estate</h2>
+    <div class="prose">
+      {% for paragraph in copy.bio %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+      <p><a href="{{ '/about/' | url }}">More about the practice</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist wrapper" aria-labelledby="buy-steps-title">
+  <p class="section__eyebrow">Buying with me</p>
+  <h2 id="buy-steps-title" class="section__title">Five steps to your next home</h2>
+  <ol class="steps-grid">
     {% for step in process.buying %}
-    <li>
-      <strong>{{ step.title }}</strong>
+    <li class="step-card">
+      <h3 class="step-card__title">{{ step.title }}</h3>
       {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
     </li>
     {% endfor %}
   </ol>
-  <p><a href="{{ '/about/#process' | url }}">See buying and selling steps on About</a></p>
+  <div class="loan-strip" aria-labelledby="loan-title">
+    <p class="section__eyebrow section__eyebrow--gold" id="loan-title">Loan types we discuss</p>
+    <p class="prose">{{ loans.intro }}</p>
+    <div class="loan-grid">
+      {% for loan in loans.items %}
+      <article class="loan-card card">
+        <h3>{{ loan.title }}</h3>
+        <p>{{ loan.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  <p class="prose" style="margin-block-start: var(--space-5);"><a href="{{ '/buy/' | url }}">See the full buying page</a></p>
 </section>
 
-<section class="section wrapper" aria-labelledby="listings-title">
-  <h2 id="listings-title" class="section__title">Sample listings</h2>
+<section class="section wrapper" aria-labelledby="sell-steps-title">
+  <p class="section__eyebrow">Selling with me</p>
+  <h2 id="sell-steps-title" class="section__title">Five steps to a smooth sale</h2>
+  <ol class="steps-grid">
+    {% for step in process.selling %}
+    <li class="step-card">
+      <h3 class="step-card__title">{{ step.title }}</h3>
+      {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="btn-row" style="margin-block-start: var(--space-5);">
+    <a class="btn btn--primary" href="{{ '/home-value/' | url }}">What's my home worth?</a>
+    <a class="btn btn--outline" href="{{ '/sell/' | url }}">Selling page</a>
+  </div>
+</section>
+
+<section class="section section--paper wrapper" aria-labelledby="listings-title">
+  <h2 id="listings-title" class="section__title">Featured listings</h2>
   <p class="prose">{{ listings.disclaimer }}</p>
-  <div class="card-grid">
+  <div class="card-grid card-grid--listings">
     {% for listing in listings.items %}
     {% include "partials/listing-card.njk" %}
     {% endfor %}
   </div>
-  <p><a href="{{ '/listings/' | url }}">View the sample listings page</a></p>
+  <p><a href="{{ '/listings/' | url }}">View all sample listings</a></p>
 </section>
 
-<section class="section section--sand wrapper" aria-labelledby="quotes-title">
-  <h2 id="quotes-title" class="section__title">Sample quotes</h2>
+<section class="section section--mist wrapper" aria-labelledby="areas-grid-title">
+  <h2 id="areas-grid-title" class="section__title">Neighborhood guides</h2>
+  <p class="prose">{{ areas.indexIntro }}</p>
+  <div class="area-grid">
+    {% for city in areas.cities %}
+    <a class="area-link" href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }}</a>
+    {% endfor %}
+  </div>
+  <p style="margin-block-start: var(--space-4);"><a href="{{ '/areas/' | url }}">Browse all area guides</a></p>
+</section>
+
+<section class="section wrapper" aria-labelledby="quotes-title">
+  <p class="section__eyebrow">Testimonials</p>
+  <h2 id="quotes-title" class="section__title">What neighbors say</h2>
+  <p class="stars" aria-hidden="true">★★★★★</p>
   <div class="card-grid">
     {% for quote in quotes.items %}
     {% include "partials/quote.njk" %}
     {% endfor %}
   </div>
+  <p><a href="{{ '/reviews/' | url }}">Reviews page</a></p>
 </section>
 
-<section class="section wrapper" aria-labelledby="cities-title">
-  <h2 id="cities-title" class="section__title">City guides</h2>
-  <div class="card-grid">
-    {% for city in areas.cities %}
-    <article class="card">
-      <h3>{{ city.name }}</h3>
-      <p>{{ city.blurb }}</p>
-      <p><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a></p>
-    </article>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="section wrapper" aria-labelledby="questions-title">
-  <h2 id="questions-title" class="section__title">Questions</h2>
-  {% for item in questions.items %}
-  <details>
-    <summary>{{ item.question }}</summary>
-    <p>{{ item.answer }}</p>
-  </details>
-  {% endfor %}
-</section>
-
-<section class="section section--sand wrapper" aria-labelledby="closing-title">
-  <h2 id="closing-title" class="section__title">Talk with the practice</h2>
-  <div class="btn-row">
-    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
-    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+<section class="contact-band" aria-labelledby="closing-title">
+  <div class="wrapper split">
+    <div>
+      <h2 id="closing-title">Let's talk</h2>
+      <p class="prose">Tell me what you are trying to do. This demo form does not send, and the phone line above is a placeholder until Anthony shares a real number.</p>
+      <p>Phone: {{ site.placeholder }}</p>
+    </div>
+    <div>
+      {% include "partials/lead-form.njk" %}
+    </div>
   </div>
 </section>

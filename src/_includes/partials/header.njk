@@ -1,6 +1,11 @@
 <header class="site-header">
   <div class="site-header__inner wrapper">
-    <p class="site-brand"><a href="{{ '/' | url }}">{{ site.name }}</a></p>
+    <p class="site-brand">
+      <a href="{{ '/' | url }}">
+        <span class="site-brand__name">Anthony Long</span>
+        <span class="site-brand__realty">Realty</span>
+      </a>
+    </p>
     <button
       type="button"
       class="nav-toggle"
@@ -12,13 +17,17 @@
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-nav-panel hidden>
       <ul class="primary-nav__list">
-        <li><a href="{{ '/' | url }}">Home</a></li>
-        <li><a href="{{ '/about/' | url }}">About</a></li>
-        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/buy/' | url }}">Buy</a></li>
+        <li><a href="{{ '/sell/' | url }}">Sell</a></li>
         <li><a href="{{ '/areas/' | url }}">Areas</a></li>
-        <li><a href="{{ '/home-value/' | url }}">Home value</a></li>
+        <li><a href="{{ '/listings/' | url }}">Listings</a></li>
+        <li><a href="{{ '/about/' | url }}">About</a></li>
         <li><a href="{{ '/contact/' | url }}">Contact</a></li>
       </ul>
     </nav>
+    <div class="site-header__actions">
+      <p class="header-phone">Phone: {{ site.placeholder }}</p>
+      <a class="btn btn--primary" href="{{ '/contact/' | url }}">Let's Talk</a>
+    </div>
   </div>
 </header>

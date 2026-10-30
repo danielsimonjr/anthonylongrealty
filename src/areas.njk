@@ -1,14 +1,19 @@
 ---
 layout: layouts/base.njk
 schemaVariant: inner
-title: City guides · Anthony Long Realty (demo)
-description: Demo city guides for DeSoto, Cedar Hill, Duncanville, and Lancaster in southwest Dallas County. Each one covers how buying and selling would work there.
+title: Area guides · Anthony Long Realty (demo)
+description: Demo city guides for six southwest Dallas County cities with Anthony Long Realty. Each guide explains buying and selling steps with placeholders—not a live search.
 permalink: areas/index.html
 ---
-<div class="wrapper section">
+<div class="wrapper page-layout">
   <h1>Area guides</h1>
   <p class="prose">{{ areas.indexIntro }}</p>
-  <div class="card-grid card-grid--cities">
+  <div class="area-grid">
+    {% for city in areas.cities %}
+    <a class="area-link" href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }}</a>
+    {% endfor %}
+  </div>
+  <div class="card-grid" style="margin-block-start: var(--space-6);">
     {% for city in areas.cities %}
     <article class="card">
       <h2 class="card__title">{{ city.name }}</h2>

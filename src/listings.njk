@@ -2,14 +2,14 @@
 layout: layouts/base.njk
 schemaVariant: inner
 title: Sample listings · Anthony Long Realty (demo)
-description: Sample listing cards for the Anthony Long Realty demo. They are made-up examples with no addresses or prices, and the demo is not connected to an MLS.
+description: Sample listing cards for the Anthony Long Realty demo near DeSoto, TX. Made-up examples with no addresses or prices; not connected to an MLS or IDX feed.
 permalink: listings/index.html
 ---
-<div class="wrapper section">
+<div class="wrapper page-layout">
   <h1>Sample listings</h1>
   <p class="prose">{{ listings.disclaimer }}</p>
   <h2 class="section__title">Sample cards</h2>
-  <div class="card-grid">
+  <div class="card-grid card-grid--listings">
     {% for listing in listings.items %}
     {% include "partials/listing-card.njk" %}
     {% endfor %}

@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+schemaVariant: inner
+title: Client reviews · Anthony Long Realty (demo)
+description: Placeholder review cards for the Anthony Long Realty demo. Each quote is labeled sample text—not real testimonials—and no client names are listed.
+permalink: reviews/index.html
+---
+<div class="wrapper page-layout">
+  <h1>Reviews</h1>
+  <p class="page-intro">{{ copy.reviewsLead }}</p>
+  <p class="stars" aria-hidden="true">★★★★★</p>
+  <div class="card-grid">
+    {% for quote in quotes.items %}
+    {% include "partials/quote.njk" %}
+    {% endfor %}
+  </div>
+  <p class="prose">When Anthony shares real reviews, replace these cards and keep the sample labels off the live site.</p>
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
+  </div>
+</div>

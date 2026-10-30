@@ -1,0 +1,25 @@
+{
+  "intro": "Loan types buyers ask about. This demo does not quote rates, credit scores, or down payments.",
+  "items": [
+    {
+      "title": "Conventional",
+      "body": "A standard mortgage path for buyers who meet typical credit and down-payment guidelines. Your lender sets the numbers."
+    },
+    {
+      "title": "FHA",
+      "body": "A government-backed option that can help some buyers with lower down payments. We connect you with a lender you choose."
+    },
+    {
+      "title": "VA",
+      "body": "Benefits for eligible military service members and veterans. Eligibility and terms come from your lender and the VA."
+    },
+    {
+      "title": "USDA",
+      "body": "Zero-down options may be available in eligible rural areas. A lender confirms whether a property qualifies."
+    },
+    {
+      "title": "Self-employed",
+      "body": "Documentation looks different when you run your own business. We stay in step with your lender on what they need."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+schemaVariant: inner
+title: Sell your home · Anthony Long Realty (demo)
+description: Demo selling page for Anthony Long Realty near DeSoto, TX. Five selling steps and a home-value link. Placeholders only; forms do not send on this demo.
+permalink: sell/index.html
+---
+<div class="wrapper page-layout">
+  <h1>Sell with Anthony Long Realty</h1>
+  <p class="page-intro">{{ copy.sellingPageLead }}</p>
+  <p class="prose">{{ copy.sellingIntro }}</p>
+
+  <h2 class="section__title">Five selling steps</h2>
+  <ol class="steps-grid">
+    {% for step in process.selling %}
+    <li class="step-card">
+      <h3 class="step-card__title">{{ step.title }}</h3>
+      {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/home-value/' | url }}">What's my home worth?</a>
+    <a class="btn btn--outline" href="{{ '/contact/?topic=selling' | url }}">Talk about selling</a>
+  </div>
+</div>
