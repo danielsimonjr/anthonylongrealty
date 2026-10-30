@@ -147,7 +147,9 @@ Every root-relative URL starts with `/anthonylongrealty/`. That includes CSS, JS
 
 Trailing-slash permalinks (`/about/index.html` served as `/about/`). The 404 document is the exception: permalink `404.html`, so Pages can find it at the artifact root.
 
-This plan phase does not enable Pages. The deploy workflow, when it is added, is `workflow_dispatch` only. It has no `push` trigger. Enabling Pages in the repo settings, calling the Pages API, and creating git tags are out of scope for every pull request in this list. A person can turn Pages on later. Until then, `main` stays green because deploy does not run on push.
+This plan does not enable Pages. Enabling Pages in the repo settings, calling the Pages API, and creating git tags are out of scope for every pull request in this list. A person turns Pages on, once, by choosing “GitHub Actions” as the source.
+
+The owner has approved deploying this demo at `https://danielsimonjr.com/anthonylongrealty/`. The deploy workflow therefore runs on `workflow_dispatch` and on `push` to `main`. It never runs on `pull_request`, so a pull request cannot publish anything. Until a person selects “GitHub Actions” as the Pages source, the deploy job fails at its deploy step. That failure is expected and does not touch the CI jobs in section 15. The workflow does not turn Pages on for itself: no `actions/configure-pages` with `enablement`, and no call to the Pages API.
 
 `robots.txt` shipped by this repo is served at `https://danielsimonjr.com/anthonylongrealty/robots.txt`. Crawlers look for `https://danielsimonjr.com/robots.txt`, which belongs to the user site. Still publish a project `robots.txt` and a sitemap. Do not edit the user-site repo from these pull requests.
 
@@ -529,7 +531,7 @@ Jobs, all required:
 
 1. **Build** — `actions/checkout`, `actions/setup-node` for Node 22 with the npm cache, `npm ci`, `npm run build`.
 2. **HTML validation** — Temurin 21 via `actions/setup-java`, then the Nu Html Checker through the `vnu-jar` npm package, errors failing the job, CSS and SVG included. Validate the built files in `_site`, not the Nunjucks source. Confirm the CLI name from that package’s help on the day it is installed.
-3. **Link check** — start `npx @11ty/eleventy --serve --port=8080`, wait until `http://127.0.0.1:8080/anthonylongrealty/` responds, then run lychee with fragment checking against that URL. Retry external URLs a few times. The TREC PDFs are part of the crawl. A plain static server of `_site` will not see `/anthonylongrealty/` routes; use Eleventy’s server.
+3. **Link check** — start `npx @11ty/eleventy --serve --port=8080`, wait until `http://127.0.0.1:8080/anthonylongrealty/` responds, then run lychee with fragment checking. Lychee reads the links on each page it is given and does not follow them, so give it every built route (the 404 document included), not just the home page. Retry external URLs a few times. The TREC PDFs are part of the crawl, and TREC refuses requests that look like a bare script, so send a browser-style user agent. A plain static server of `_site` will not see `/anthonylongrealty/` routes; use Eleventy’s server.
 4. **Guards** — `node scripts/guard.mjs` reads `_site` and fails the job when any rule below misses.
 
 Guard rules:
@@ -545,16 +547,20 @@ Guard rules:
 - Each built HTML page except `404.html` has exactly one `<h1`, a canonical link on the demo origin, and a meta description.
 - `404.html` exists.
 - Sample listing data does not contain a street number.
+- Every external `<a href>` is one of the two TREC PDFs. Any other `http` link in a page is the canonical or an Open Graph URL on the demo origin.
+- No phone-number pattern, no email address, and no `noindex` anywhere in the built pages.
+- JSON-LD omits `telephone`, `email`, `image`, `address`, `identifier`, `aggregateRating`, and `review`.
+- `robots.txt` and `sitemap.xml` only use the demo origin and the base path.
 
 `vnu` and lychee are the CI check this plan promises. The guards exist so the base path and the placeholder rules fail in CI instead of in review comments.
 
 Deploy workflow `.github/workflows/pages.yml`:
 
-- Trigger: `workflow_dispatch` only.
+- Triggers: `workflow_dispatch` and `push` to `main`. Nothing else. In particular, no `pull_request` trigger.
 - Permissions: `contents: read`, `pages: write`, `id-token: write`.
 - Concurrency group `pages`, without canceling an in-progress deploy.
-- Build with the same Node 22 steps, upload the `_site` directory with `actions/upload-pages-artifact`, then `actions/deploy-pages`.
-- A comment at the top of the file says Pages is not enabled by this workflow and that nobody should add a `push` trigger as part of these build pull requests.
+- Build with the same Node 22 steps, run `node scripts/guard.mjs` against the build, upload the `_site` directory with `actions/upload-pages-artifact`, then `actions/deploy-pages`. A guard failure blocks the deploy.
+- A comment at the top of the file says this workflow does not enable Pages, and that a person must choose “GitHub Actions” as the Pages source before the first deploy can succeed.
 
 Do not add a `CNAME` file. Do not call the Pages API. Do not create tags.
 
@@ -613,7 +619,7 @@ Merge to `main` in this order. One branch per pull request. Each branch starts f
 
 ### PR 1 — Scaffold, tokens, stubs, CI
 
-Eleventy 3, `pathPrefix`, token file, base layout with a placeholder header/footer, `site.json`, and a stub page for every route in section 6 so nav links resolve. Stub body is a single H1 and one sentence: “Content arrives in a later pull request.” CI from section 15 is green, including vnu, lychee, and the guards that already apply (base path, one h1, 404, no tel/mailto). `pages.yml` is dispatch-only. README tells a developer to run `npm run dev` and open `http://127.0.0.1:8080/anthonylongrealty/`.
+Eleventy 3, `pathPrefix`, token file, base layout with a placeholder header/footer, `site.json`, and a stub page for every route in section 6 so nav links resolve. Stub body is a single H1 and one sentence: “Content arrives in a later pull request.” CI from section 15 is green, including vnu, lychee, and the guards that already apply (base path, one h1, 404, no tel/mailto). `pages.yml` runs on `workflow_dispatch` and on `push` to `main`, and not on `pull_request`. README tells a developer to run `npm run dev` and open `http://127.0.0.1:8080/anthonylongrealty/`.
 
 Acceptance: `npm run check` passes. View source of the stub homepage shows asset URLs under `/anthonylongrealty/`. No `CNAME`. Pages remains off.
 
@@ -659,7 +665,7 @@ Per-page titles and descriptions, canonicals, `robots.txt`, `sitemap.xml`, JSON-
 
 Acceptance: scores meet section 14. Schema omits the forbidden properties. Sitemap locations use the demo origin and the base path. `npm run check` is green. Pages is still not enabled. No tag.
 
-After PR 8, a person may enable GitHub Pages with “GitHub Actions” as the source and run the dispatch workflow. That step is not one of these pull requests.
+After PR 8, a person may enable GitHub Pages with “GitHub Actions” as the source. The next push to `main`, or a manual run of the deploy workflow, then publishes the site. That step is not one of these pull requests.
 
 ## 18. Reviewer checklist
 
@@ -671,7 +677,7 @@ Fail the pull request when any of these is true:
 - A listing looks like a real home for sale, or an IDX/MLS widget is present.
 - A form can submit to Formspree, another host, or a `mailto:`.
 - An asset, canonical, or internal link is missing `/anthonylongrealty/`.
-- A `CNAME` file, a Pages settings change, a tag, or a `push` trigger on `pages.yml` is included.
+- A `CNAME` file, a Pages settings change, a tag, or a `pages.yml` trigger other than `workflow_dispatch` and `push` to `main` is included.
 - The REALTOR® mark is used.
 - The IABS PDF is rebuilt with guessed license data.
 - HTML validation or the link check fails.
