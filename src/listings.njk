@@ -4,7 +4,12 @@ title: Listings · Anthony Long Realty (demo)
 description: Sample listing cards for the Anthony Long Realty demo. Not connected to an MLS.
 permalink: listings/index.html
 ---
-<div class="wrapper section prose">
-<h1>Listings</h1>
-<p>Content arrives in a later pull request.</p>
+<div class="wrapper section">
+  <h1>Sample listings</h1>
+  <p class="prose">{{ listings.disclaimer }}</p>
+  <div class="card-grid">
+    {% for listing in listings.items %}
+    {% include "partials/listing-card.njk" %}
+    {% endfor %}
+  </div>
 </div>
