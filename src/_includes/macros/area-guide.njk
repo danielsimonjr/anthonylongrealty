@@ -1,5 +1,4 @@
-{% macro renderGuide(slug) %}
-{% set guide = areas.guides[slug] %}
+{% macro renderGuide(guide) %}
 <div class="wrapper section prose">
   <h1>{{ guide.name }}</h1>
   {% for paragraph in guide.paragraphs %}
