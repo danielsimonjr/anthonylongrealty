@@ -140,12 +140,22 @@ process.on("SIGINT", () => {
   process.exit(130);
 });
 
-function runLychee(args) {
-  return spawnSync(lychee, ["--no-progress", "--timeout", "30", "--include-fragments", ...args], {
+function runLychee(args, { capture = false } = {}) {
+  const result = spawnSync(lychee, ["--no-progress", "--timeout", "30", "--include-fragments", ...args], {
     cwd: root,
-    stdio: "inherit",
-  }).status ?? 1;
+    encoding: "utf8",
+    stdio: capture ? ["ignore", "pipe", "pipe"] : "inherit",
+  });
+  const output = `${result.stdout ?? ""}${result.stderr ?? ""}`;
+  if (capture) process.stdout.write(output);
+  return { status: result.status ?? 1, output };
 }
+
+// An external page that answers 404 or 410 is a broken link. A host that refuses the
+// connection, times out, or answers 403, 429, or 5xx from every attempt is a host we cannot
+// judge from here (trec.texas.gov does this to GitHub's runners), so that is a warning.
+const GONE = /\[(?:404|410)\]/;
+const UNREACHABLE = /\[(?:ERROR|TIMEOUT|403|429|5\d\d)\]/;
 
 // Every external URL the built pages point at, once each. TREC answers the same URL with 200
 // and then 403 a few seconds later, so each URL gets its own spaced retries instead of being
@@ -173,29 +183,38 @@ try {
 
   console.log(`Checking ${routes.length} routes on ${serveOrigin}:\n  ${routes.join("\n  ")}`);
   // Only http: the local server. https links are checked one at a time below.
-  status = runLychee(["--scheme", "http", ...routes]);
+  status = runLychee(["--scheme", "http", ...routes]).status;
 
   const external = externalLinks();
   console.log(`\nChecking ${external.length} external links:\n  ${external.join("\n  ")}`);
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "links-"));
+  const unreachable = [];
   for (const url of external) {
     const list = path.join(tmp, "url.txt");
     fs.writeFileSync(list, `${url}\n`);
-    let externalStatus = 1;
-    for (let attempt = 1; attempt <= 5 && externalStatus !== 0; attempt++) {
+    let result = { status: 1, output: "" };
+    for (let attempt = 1; attempt <= 5 && result.status !== 0 && !GONE.test(result.output); attempt++) {
       if (attempt > 1) await new Promise((r) => setTimeout(r, 4000 * attempt));
-      externalStatus = runLychee([
-        "--max-retries",
-        "3",
-        "--retry-wait-time",
-        "2",
-        "--user-agent",
-        // TREC returns 403 to bare script user agents.
-        `Mozilla/5.0 (compatible; anthonylongrealty-demo/1.0; +${site.demoOrigin}${site.basePath})`,
-        list,
-      ]);
+      result = runLychee(
+        [
+          "--max-retries",
+          "3",
+          "--retry-wait-time",
+          "2",
+          "--user-agent",
+          // TREC returns 403 to bare script user agents.
+          `Mozilla/5.0 (compatible; anthonylongrealty-demo/1.0; +${site.demoOrigin}${site.basePath})`,
+          list,
+        ],
+        { capture: true }
+      );
     }
-    if (externalStatus !== 0) status = externalStatus;
+    if (result.status === 0) continue;
+    if (!GONE.test(result.output) && UNREACHABLE.test(result.output)) unreachable.push(url);
+    else status = result.status;
+  }
+  for (const url of unreachable) {
+    console.warn(`::warning::${url} could not be reached from this machine after 5 attempts. It is not counted as a broken link; open it by hand.`);
   }
   fs.rmSync(tmp, { recursive: true, force: true });
 } catch (error) {
