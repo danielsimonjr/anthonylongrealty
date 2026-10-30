@@ -5,6 +5,11 @@ description: City guides for DeSoto, Cedar Hill, Duncanville, and Lancaster on t
 permalink: areas/index.html
 ---
 <div class="wrapper section prose">
-<h1>Areas</h1>
-<p>Content arrives in a later pull request.</p>
+  <h1>Area guides</h1>
+  <p>{{ areas.indexIntro }}</p>
+  <ul>
+    {% for city in areas.cities %}
+    <li><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a> — {{ city.blurb }}</li>
+    {% endfor %}
+  </ul>
 </div>

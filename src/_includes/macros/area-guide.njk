@@ -1,0 +1,31 @@
+{% macro renderGuide(slug) %}
+{% set guide = areas.guides[slug] %}
+<div class="wrapper section prose">
+  <h1>{{ guide.name }}</h1>
+  {% for paragraph in guide.paragraphs %}
+  <p>{{ paragraph }}</p>
+  {% endfor %}
+
+  <h2>Buying in {{ guide.name }}</h2>
+  <p>We start with your timeline and the streets you want to see. Financing stays with a lender you choose.</p>
+
+  <h2>Selling in {{ guide.name }}</h2>
+  <p>We walk the house, talk through prep, and plan showings. Price talk is a conversation, not an online estimate.</p>
+
+  <h2>Sample listings</h2>
+  {% if guide.listingId %}
+  {% for listing in listings.items %}
+  {% if listing.id == guide.listingId %}
+  {% include "partials/listing-card.njk" %}
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <p>There is no sample listing card for {{ guide.name }} in this demo. <a href="{{ '/contact/' | url }}">Contact</a> to ask about a real search.</p>
+  {% endif %}
+
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
+    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+  </div>
+</div>
+{% endmacro %}

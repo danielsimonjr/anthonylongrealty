@@ -4,7 +4,5 @@ title: Cedar Hill guide · Anthony Long Realty (demo)
 description: Cedar Hill Texas area guide on the Anthony Long Realty demo site.
 permalink: areas/cedar-hill/index.html
 ---
-<div class="wrapper section prose">
-<h1>Cedar Hill</h1>
-<p>Content arrives in a later pull request.</p>
-</div>
+{% from "macros/area-guide.njk" import renderGuide %}
+{{ renderGuide("cedar-hill") }}

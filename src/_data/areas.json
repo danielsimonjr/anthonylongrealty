@@ -1,9 +1,48 @@
 {
   "intro": "Southwest Dallas County is the focus of this demo.",
+  "indexIntro": "These guides describe place and process in DeSoto, Cedar Hill, Duncanville, and Lancaster. They are written for this demo and do not replace a live search.",
   "cities": [
     { "name": "DeSoto", "slug": "desoto", "blurb": "City guide for DeSoto" },
     { "name": "Cedar Hill", "slug": "cedar-hill", "blurb": "City guide for Cedar Hill" },
     { "name": "Duncanville", "slug": "duncanville", "blurb": "City guide for Duncanville" },
     { "name": "Lancaster", "slug": "lancaster", "blurb": "City guide for Lancaster" }
-  ]
+  ],
+  "guides": {
+    "desoto": {
+      "name": "DeSoto",
+      "paragraphs": [
+        "DeSoto is a city in southwest Dallas County, south of Dallas.",
+        "Neighboring cities include Cedar Hill, Duncanville, and Lancaster along the same county band.",
+        "Streets and parks change character from block to block, so tours stay street-by-street."
+      ],
+      "listingId": "sample-a"
+    },
+    "cedar-hill": {
+      "name": "Cedar Hill",
+      "paragraphs": [
+        "Cedar Hill is a city in southwest Dallas County.",
+        "Rolling terrain and open spaces sit beside older retail corridors and newer subdivisions.",
+        "Buyers often compare routes toward Dallas and Fort Worth before picking a daily commute."
+      ],
+      "listingId": "sample-b"
+    },
+    "duncanville": {
+      "name": "Duncanville",
+      "paragraphs": [
+        "Duncanville is an older inner-ring city in southwest Dallas County.",
+        "Main corridors connect to Dallas and to neighboring DeSoto and Cedar Hill.",
+        "Blocks mix mid-century homes with infill construction, so walk-throughs stay block-by-block."
+      ],
+      "listingId": "sample-c"
+    },
+    "lancaster": {
+      "name": "Lancaster",
+      "paragraphs": [
+        "Lancaster is a city in southwest Dallas County, south of Dallas.",
+        "The city shares county roads with neighboring DeSoto and Duncanville.",
+        "This demo does not include a sample listing card for Lancaster."
+      ],
+      "listingId": null
+    }
+  }
 }
