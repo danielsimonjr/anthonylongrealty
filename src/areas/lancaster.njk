@@ -5,4 +5,4 @@ description: Lancaster Texas area guide on the Anthony Long Realty demo site.
 permalink: areas/lancaster/index.html
 ---
 {% from "macros/area-guide.njk" import renderGuide %}
-{{ renderGuide(areas.guides.lancaster) }}
+{{ renderGuide(areas.guides.lancaster, listings.items) }}

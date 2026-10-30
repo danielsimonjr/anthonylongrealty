@@ -19,10 +19,14 @@ Open [http://127.0.0.1:8080/anthonylongrealty/](http://127.0.0.1:8080/anthonylon
 npm run check
 ```
 
-Runs a production build, HTML validation (vnu), link check (lychee against the Eleventy dev server), and repository guard rules.
+Runs a production build, HTML, CSS, and SVG validation (the Nu Html Checker, which needs Java 21), a link check (lychee, against every built route served by Eleventy), and the repository guard rules in `scripts/guard.mjs`.
+
+The link check downloads a pinned, checksum-verified lychee release into `.cache/`. Set `LYCHEE_BIN` to use your own build instead; it must be 0.24 or newer, because older releases silently skip fragment checks.
 
 ## Deploy
 
-GitHub Pages is not enabled from these build pull requests. When Pages is configured on the repository, use the **Deploy Pages** workflow (`workflow_dispatch`).
+`.github/workflows/pages.yml` publishes `_site` to GitHub Pages on `workflow_dispatch` and on every push to `main`. It never runs on pull requests.
 
-Public demo URL (when hosted): `https://danielsimonjr.com/anthonylongrealty/`
+The workflow does not enable Pages. Until a person chooses **GitHub Actions** as the Pages source in the repository settings, the deploy step fails and nothing is published. This repo has no `CNAME` file: the demo is served from the `danielsimonjr.com` user site under `/anthonylongrealty/`.
+
+Public demo URL: `https://danielsimonjr.com/anthonylongrealty/`

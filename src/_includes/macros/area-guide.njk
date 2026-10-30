@@ -1,4 +1,5 @@
-{% macro renderGuide(guide) %}
+{# Macros do not see the page data, so the guide and the listings are passed in. #}
+{% macro renderGuide(guide, listingItems) %}
 <div class="wrapper section prose">
   <h1>{{ guide.name }}</h1>
   {% for paragraph in guide.paragraphs %}
@@ -6,20 +7,21 @@
   {% endfor %}
 
   <h2>Buying in {{ guide.name }}</h2>
-  <p>We start with your timeline and the streets you want to see. Financing stays with a lender you choose.</p>
+  <p>We start with your timeline and the streets you want to tour in {{ guide.name }}. Financing is a separate conversation with a lender you choose.</p>
 
   <h2>Selling in {{ guide.name }}</h2>
-  <p>We walk the house, talk through prep, and plan showings. Price talk is a conversation, not an online estimate.</p>
+  <p>We walk the house, talk through prep, and plan showings. A home-value conversation is not an appraisal, and this demo does not calculate a price.</p>
 
   <h2>Sample listings</h2>
-  {% if guide.listingId %}
-  {% for listing in listings.items %}
-  {% if listing.id == guide.listingId %}
+  {% set matches = 0 %}
+  {% for listing in listingItems %}
+  {% if listing.city == guide.name %}
+  {% set matches = matches + 1 %}
   {% include "partials/listing-card.njk" %}
   {% endif %}
   {% endfor %}
-  {% else %}
-  <p>There is no sample listing card for {{ guide.name }} in this demo. <a href="{{ '/contact/' | url }}">Contact</a> to ask about a real search.</p>
+  {% if matches == 0 %}
+  <p>There is no sample card for {{ guide.name }} in this demo. <a href="{{ '/contact/?topic=buying' | url }}">Ask about a real search</a> through the contact form.</p>
   {% endif %}
 
   <div class="btn-row">
