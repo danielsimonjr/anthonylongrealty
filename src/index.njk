@@ -28,7 +28,10 @@ description: Demo site for Anthony Long Realty in southwest Dallas County. Place
   <h2 id="practice-title" class="section__title">The practice</h2>
   <div class="prose">
     <p>Anthony Long Realty works with buyers and sellers in southwest Dallas County. This demo explains how we talk through goals before any contract.</p>
-    <div class="portrait" role="img" aria-label="Placeholder portrait. No photo is on file.">Placeholder portrait. No photo is on file.</div>
+    <div class="portrait">
+      <span class="portrait__monogram" aria-hidden="true">AL</span>
+      <span class="portrait__label">Placeholder portrait. No photo is on file.</span>
+    </div>
     <p>License: {{ site.placeholder }}</p>
     <p><a href="{{ '/about/' | url }}">Read about the practice</a></p>
   </div>
@@ -69,7 +72,7 @@ description: Demo site for Anthony Long Realty in southwest Dallas County. Place
 
 <section class="section wrapper" aria-labelledby="cities-title">
   <h2 id="cities-title" class="section__title">City guides</h2>
-  <div class="card-grid card-grid--cities">
+  <div class="card-grid">
     {% for city in areas.cities %}
     <article class="card">
       <h3>{{ city.name }}</h3>
