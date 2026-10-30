@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "question": "Can I search live listings here?",
+      "answer": "This demo has sample cards, not a live search. Real availability would come from a separate MLS-connected site."
+    },
+    {
+      "question": "Which cities do the guides cover?",
+      "answer": "The guides cover DeSoto, Cedar Hill, Duncanville, and Lancaster in southwest Dallas County."
+    },
+    {
+      "question": "Is the home-value form an appraisal?",
+      "answer": "A home-value request is not an appraisal. It would start a conversation if this were a live site."
+    },
+    {
+      "question": "Do the forms send email or save data?",
+      "answer": "The forms do not send, and the phone and email are placeholders."
+    },
+    {
+      "question": "What does the practice charge?",
+      "answer": "What the practice is paid is not listed here. Compensation is negotiable and is not set on this demo."
+    }
+  ]
+}

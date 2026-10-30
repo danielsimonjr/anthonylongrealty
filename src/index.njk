@@ -3,7 +3,97 @@ layout: layouts/base.njk
 title: Anthony Long Realty (demo) · Southwest Dallas County
 description: Demo site for Anthony Long Realty in southwest Dallas County. Placeholders only; forms do not send.
 ---
-<div class="wrapper section prose">
-<h1>Home</h1>
-<p>Content arrives in a later pull request.</p>
-</div>
+<section class="section hero wrapper">
+  <h1>Help buying and selling in DeSoto, Cedar Hill, Duncanville, and Lancaster</h1>
+  <p class="prose">Anthony Long Realty is an independent Texas practice focused on these southwest Dallas County cities.</p>
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
+    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+  </div>
+</section>
+
+<section class="section wrapper" aria-labelledby="services-title">
+  <h2 id="services-title" class="section__title">Services</h2>
+  <div class="card-grid">
+    {% for service in services.items %}
+    <article class="card">
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.body }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section--sand wrapper" aria-labelledby="practice-title">
+  <h2 id="practice-title" class="section__title">The practice</h2>
+  <div class="prose">
+    <p>Anthony Long Realty works with buyers and sellers in southwest Dallas County. This demo explains how we talk through goals before any contract.</p>
+    <div class="portrait" role="img" aria-label="Placeholder portrait. No photo is on file.">Placeholder portrait. No photo is on file.</div>
+    <p>License: {{ site.placeholder }}</p>
+    <p><a href="{{ '/about/' | url }}">Read about the practice</a></p>
+  </div>
+</section>
+
+<section class="section wrapper" aria-labelledby="process-preview-title">
+  <h2 id="process-preview-title" class="section__title">Buying steps</h2>
+  <ol class="process-list prose">
+    {% for step in process.buying %}
+    <li>
+      <strong>{{ step.title }}</strong>
+      {% if step.note %}<p class="step-note">{{ step.note }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  <p><a href="{{ '/about/#process' | url }}">See buying and selling steps on About</a></p>
+</section>
+
+<section class="section wrapper" aria-labelledby="listings-title">
+  <h2 id="listings-title" class="section__title">Sample listings</h2>
+  <p class="prose">{{ listings.disclaimer }}</p>
+  <div class="card-grid">
+    {% for listing in listings.items %}
+    {% include "partials/listing-card.njk" %}
+    {% endfor %}
+  </div>
+  <p><a href="{{ '/listings/' | url }}">View the sample listings page</a></p>
+</section>
+
+<section class="section section--sand wrapper" aria-labelledby="quotes-title">
+  <h2 id="quotes-title" class="section__title">Sample quotes</h2>
+  <div class="card-grid">
+    {% for quote in quotes.items %}
+    {% include "partials/quote.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section wrapper" aria-labelledby="cities-title">
+  <h2 id="cities-title" class="section__title">City guides</h2>
+  <div class="card-grid card-grid--cities">
+    {% for city in areas.cities %}
+    <article class="card">
+      <h3>{{ city.name }}</h3>
+      <p>{{ city.blurb }}</p>
+      <p><a href="{{ ('/areas/' ~ city.slug ~ '/') | url }}">{{ city.name }} guide</a></p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section wrapper" aria-labelledby="questions-title">
+  <h2 id="questions-title" class="section__title">Questions</h2>
+  {% for item in questions.items %}
+  <details>
+    <summary>{{ item.question }}</summary>
+    <p>{{ item.answer }}</p>
+  </details>
+  {% endfor %}
+</section>
+
+<section class="section section--sand wrapper" aria-labelledby="closing-title">
+  <h2 id="closing-title" class="section__title">Talk with the practice</h2>
+  <div class="btn-row">
+    <a class="btn btn--primary" href="{{ '/contact/' | url }}">Contact</a>
+    <a class="btn btn--secondary" href="{{ '/home-value/' | url }}">Home value</a>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+{
+  "intro": "Southwest Dallas County is the focus of this demo.",
+  "cities": [
+    { "name": "DeSoto", "slug": "desoto", "blurb": "City guide for DeSoto" },
+    { "name": "Cedar Hill", "slug": "cedar-hill", "blurb": "City guide for Cedar Hill" },
+    { "name": "Duncanville", "slug": "duncanville", "blurb": "City guide for Duncanville" },
+    { "name": "Lancaster", "slug": "lancaster", "blurb": "City guide for Lancaster" }
+  ]
+}

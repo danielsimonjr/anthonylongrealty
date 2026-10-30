@@ -1,0 +1,16 @@
+{
+  "buying": [
+    { "title": "Talk through the goal" },
+    { "title": "Line up financing", "note": "A lender is a separate conversation. We do not quote rates, credit scores, or down payments." },
+    { "title": "Tour homes that fit" },
+    { "title": "Write the offer" },
+    { "title": "Inspect and close" }
+  ],
+  "selling": [
+    { "title": "Walk the house and the goal" },
+    { "title": "Talk through price", "note": "A home-value conversation is not an appraisal." },
+    { "title": "Get the house ready" },
+    { "title": "Showings and offers" },
+    { "title": "Contract to closing" }
+  ]
+}
