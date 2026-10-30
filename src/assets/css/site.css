@@ -14,6 +14,10 @@
   }
 }
 
+html {
+  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -67,19 +71,29 @@ body {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   background: var(--color-paper-raised);
   border-block-end: 1px solid var(--color-line);
 }
 
+@media (min-width: 48rem) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
 .site-header__inner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: 0 var(--space-4);
   min-height: var(--header-h);
+}
+
+.primary-nav {
+  flex-basis: 100%;
 }
 
 .site-brand {
@@ -105,9 +119,33 @@ body {
   cursor: pointer;
 }
 
+.nav-toggle[aria-expanded="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
 @media (min-width: 48rem) {
   .nav-toggle {
     display: none;
+  }
+
+  .primary-nav {
+    flex-basis: auto;
+  }
+
+  .primary-nav[hidden] {
+    display: block;
+  }
+}
+
+/* Without scripting there is nothing to toggle, so show the links. */
+@media (scripting: none) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .primary-nav[hidden] {
+    display: block;
   }
 }
 
@@ -135,12 +173,17 @@ a {
   color: var(--color-cedar-dark);
 }
 
-.primary-nav a,
-.footer-links a {
+.primary-nav a {
   display: inline-block;
   min-height: 2.75rem;
   line-height: 2.75rem;
   padding-inline: var(--space-1);
+}
+
+.footer-links a {
+  display: inline-block;
+  min-height: 2rem;
+  line-height: 2rem;
 }
 
 a:focus-visible,
@@ -163,6 +206,24 @@ textarea:focus-visible {
 .site-footer__grid {
   display: grid;
   gap: var(--space-5);
+}
+
+@media (min-width: 48rem) {
+  .site-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__grid > .trec-block,
+  .site-footer__grid > .eho-line,
+  .site-footer__grid > .text-xs {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 60rem) {
+  .site-footer__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .footer-links {
@@ -202,21 +263,33 @@ h1 {
   max-width: var(--measure);
 }
 
+.wrapper.prose {
+  max-width: var(--content);
+}
+
+.wrapper.prose > * {
+  max-width: var(--measure);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
 @media (min-width: 40rem) {
   .card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-5);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 60rem) {
   .card-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .card-grid--cities {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -228,11 +301,11 @@ h1 {
   min-width: 2.75rem;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius);
+  font: inherit;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  font: inherit;
 }
 
 .btn--primary {
@@ -272,6 +345,8 @@ h1 {
 
 .section--sand {
   background: var(--color-sand);
+  box-shadow: 0 0 0 100vmax var(--color-sand);
+  clip-path: inset(0 -100vmax);
 }
 
 .section__title {
@@ -324,9 +399,8 @@ details + details {
 summary {
   cursor: pointer;
   font-weight: 600;
-  min-height: 2.75rem;
-  display: flex;
-  align-items: center;
+  display: list-item;
+  padding-block: var(--space-3);
 }
 
 .form-grid {
@@ -346,7 +420,7 @@ summary {
 .form-grid textarea {
   font: inherit;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--color-muted);
   border-radius: var(--radius);
   min-height: 2.75rem;
 }
@@ -369,6 +443,11 @@ summary {
   border-radius: var(--radius);
   background: var(--color-sand);
   max-width: var(--measure);
+}
+
+.form-status:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
 }
 
 .form-status[hidden] {
