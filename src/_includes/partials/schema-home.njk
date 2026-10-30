@@ -1,0 +1,16 @@
+{%- set served = [] -%}
+{%- for city in areas.cities -%}
+{%- set served = (served.push({
+  "@type": "City",
+  "name": city.name,
+  "containedInPlace": { "@type": "State", "name": "Texas" }
+}), served) -%}
+{%- endfor -%}
+{%- set schema = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": site.name,
+  "url": site.demoOrigin + ('/' | url),
+  "areaServed": served
+} -%}
+{{ schema | dump(2) | replace("<", "\\u003c") | safe }}

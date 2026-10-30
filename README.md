@@ -25,6 +25,10 @@ The link check downloads a pinned, checksum-verified lychee release into `.cache
 
 External links (only the two TREC PDFs) are checked one at a time with retries. A 404 or 410 fails the check. If the host refuses the connection, times out, or answers 403, 429, or 5xx on every attempt, the check prints a warning and passes, because trec.texas.gov sometimes refuses GitHub's runners and a government server being unreachable is not a broken link in this repo. Open the link by hand when you see that warning.
 
+## Social image
+
+`src/assets/img/og.png` (1200 x 630) is rendered from `scripts/og-source.svg`. To change it, edit the SVG, open it in a browser sized 1200 x 630, and save a screenshot over the PNG. The guard fails if the PNG is missing, the wrong size, or nearly empty.
+
 ## Deploy
 
 `.github/workflows/pages.yml` publishes `_site` to GitHub Pages on `workflow_dispatch` and on every push to `main`. It never runs on pull requests.
